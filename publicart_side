@@ -1,0 +1,56 @@
+PFont font;
+PGraphics pg;
+
+void setup() {
+  font = createFont("../Gugi-Regular.ttf", 60);
+  size(2500, 60, P2D);
+  pg = createGraphics(2500, 60, P2D);
+}
+
+void draw() {
+  background(250);
+
+  pg.beginDraw();
+  pg.background(250);
+  pg.fill(50);
+  pg.textFont(font);
+  pg.textSize(120);
+  pg.pushMatrix();
+  pg.translate(width/2, height/2);
+  pg.textAlign(CENTER, CENTER);
+  //pg.text("/ - ㅇ / ㅇ - - ㅇ - - ㅇ - ㅇ ㅇ - / - ㅇ - ㅇ ㅇ / ㅇ - - - /,", 0, 0);
+	pg.text("communication and observation",0,0);
+  pg.popMatrix();
+  pg.endDraw();
+
+	int tileSize=10;
+	int tilesX = width/tileSize;
+	int tilesY = height/tileSize;
+	
+	int tileW = int(width/tilesX);
+	int tileH = int(height/tilesY);
+	
+	for (int y = 0; y<tilesY; y++){
+		for (int x = 0; x<tilesX; x++){
+			
+			int wave = 0.2*int(sin(frameCount*0.1 +(x*y))*100);
+			
+			int sx = x*tileW;
+			int sy = y*tileH+wave;
+			int sw = tileW;
+			int sh = tileH;
+			
+			int dx = x * tileW;
+			int dy = y*tileH;
+			int dw = tileW;
+			int dh = tileH;
+			
+			copy(pg, sx,sy, sw, sh, dx, dy, dw, dh);
+		}
+	}
+   
+	
+	//saveFrame("save-####.png");
+      
+   
+}
